@@ -49,7 +49,7 @@ if [[ $? != 0 ]]; then
         exit 1;
     fi;
 
-    echo "You may try to use html-minifier-installer.sh Bash script firstly!"
+    echo "You may try to use html_minifier_installer.sh Bash script firstly!"
 
     exit 1;
 fi;
