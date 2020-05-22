@@ -108,7 +108,7 @@ do
     total_count=$((${post_info_datelines_count}+${today_post_info_datelines_count}))
 
     post_urls=$(cat index.html | grep -o -P '<a class="s xst" href="/thread-(\w+)-1-1.html' | sed -e 's/<a class="s xst" href="//g' | head -n ${total_count} | tail -n ${post_info_datelines_count})
-    post_titles=$(cat index.html | grep -P '<a class="s xst" href="/thread-(\w+)-1-1.html' | sed -e 's/<a class="s xst" href="//g' | head -n ${total_count} | tail -n ${post_info_datelines_count} | grep -o -P ">.*<\/a>" | sed -e 's/[<\/a>]//g')
+    post_titles=$(cat index.html | grep -P '<a class="s xst" href="/thread-(\w+)-1-1.html' | sed -e 's/<a class="s xst" href="//g' | head -n ${total_count} | tail -n ${post_info_datelines_count} | grep -o -P ">.*<\/a>" | sed -e 's/[ <\/a>]//g')
 
     if [[ ${post_info_datelines_count} == 0 ]]; then
         echo 'Fetching is done!'
@@ -119,7 +119,7 @@ do
 
     for post_title in ${post_titles};
     do
-        post_title_array+=(${post_title})
+        post_title_array+=("${post_title}")
     done;
 
     for post_url in ${post_urls};
@@ -133,8 +133,8 @@ do
             post_image_url=$(cat post.html | grep -o -P 'file="(\w+).*.jpg' | sed -e 's/file="//g' | head -n 1)
         fi;
 
-        post_image_array+=(${post_image_url})
-        post_url_array+=(${post_url})
+        post_image_array+=("${post_image_url}")
+        post_url_array+=("${post_url}")
         post_content_array+=("${post_description}")
     done;
 
@@ -287,11 +287,11 @@ if [[ ${row_numbers} -ge 2 ]]; then
     done;
 
     if [[ ${remainder_numbers} == 1 ]]; then
-        tmp_email_contents=$(echo ${email_one_grid_with_no_title} | sed -e "s@{{image_link_1}}@${post_image_array[0]}@g")
+        tmp_email_contents=$(echo ${email_one_grid_with_no_title} | sed -e "s@{{image_link_1}}@${post_image_array[${index_one}]}@g")
 
-        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Title_1}}@${post_title_array[0]}@g")
+        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Title_1}}@${post_title_array[${index_one}]}@g")
 
-        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Content_1}}@${post_content_array[0]}@g")
+        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Content_1}}@${post_content_array[${index_one}]}@g")
 
         tmp_final_email_contents=${tmp_final_email_contents}${tmp_email_contents}
     fi;
@@ -299,14 +299,14 @@ if [[ ${row_numbers} -ge 2 ]]; then
     if [[ ${remainder_numbers} == 2 ]]; then
         email_contents=$(echo ${email_two_grids_with_no_title} | sed -e "s/{{main_title}}/${app_tw_name}/g")
 
-        tmp_email_contents=$(echo ${email_contents} | sed -e "s@{{image_link_1}}@${post_image_array[0]}@g")
-        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{image_link_2}}@${post_image_array[1]}@g")
+        tmp_email_contents=$(echo ${email_contents} | sed -e "s@{{image_link_1}}@${post_image_array[${index_one}]}@g")
+        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{image_link_2}}@${post_image_array[${index_two}]}@g")
 
-        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Title_1}}@${post_title_array[0]}@g")
-        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Title_2}}@${post_title_array[1]}@g")
+        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Title_1}}@${post_title_array[${index_one}]}@g")
+        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Title_2}}@${post_title_array[${index_two}]}@g")
 
-        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Content_1}}@${post_content_array[0]}@g")
-        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Content_2}}@${post_content_array[1]}@g")
+        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Content_1}}@${post_content_array[${index_one}]}@g")
+        tmp_email_contents=$(echo ${tmp_email_contents} | sed -e "s@{{Content_2}}@${post_content_array[${index_two}]}@g")
 
         tmp_final_email_contents=${tmp_final_email_contents}${tmp_email_contents}
     fi;
