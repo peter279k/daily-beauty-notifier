@@ -19,6 +19,6 @@ echo "Install html-minifier package globally....."
 
 source "${HOME}/.nvm/nvm.sh" && npm install html-minifier -g
 
-echo "Check uglify-js command....."
+echo "Check html-minifier command....."
 
-source "${HOME}/.nvm/nvm.sh" && uglifyjs --version
+source "${HOME}/.nvm/nvm.sh" && html-minifier --version
