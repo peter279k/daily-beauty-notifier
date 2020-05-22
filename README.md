@@ -21,7 +21,7 @@ user2@mail.com
 "sender_name","Your Sender Name"
 "sender_email","Your Sender E-mail address"
 ```
-- Run `daily_beauty_notifier.sh` as a Cronjob!
+- Run `daily_beauty_notifier.sh your_contact_email_address` as a Cronjob!
 - Done. Enjoy it!
 
 ## Uninstallation

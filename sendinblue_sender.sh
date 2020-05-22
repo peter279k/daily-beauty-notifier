@@ -130,6 +130,3 @@ do
         --header 'content-type: application/json' \
         --data "${post_data}"
 done;
-
-echo $post_data > post_data.txt
-echo $email_final_template > email_final_template.txt
