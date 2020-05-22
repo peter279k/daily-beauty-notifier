@@ -30,7 +30,13 @@ if [[ $? != 0 ]]; then
    exit 1;
 fi;
 
-which html-minifier 2>&1 > /dev/null
+if [[ ! -d "${HOME}/.nvm/" ]]; then
+    echo "Please install NVM scrit firstly!"
+
+    exit 1;
+fi;
+
+source "${HOME}/.nvm/nvm.sh" && which html-minifier 2>&1 > /dev/null
 
 if [[ $? != 0 ]]; then
     which node 2>&1 > /dev/null
@@ -316,7 +322,7 @@ echo ${email_final_templates} > html_template.html
 
 echo "Minify email template..."
 
-html-minifier \
+source "${HOME}/.nvm/nvm.sh" && html-minifier \
     --collapse-whitespace \
     --remove-comments \
     --remove-optional-tags \
