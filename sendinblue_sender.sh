@@ -119,7 +119,6 @@ do
     post_data=$(echo ${post_data_template} | sed -e "s/{{sender_name}}/${sender_name}/g")
     post_data=$(echo ${post_data} | sed -e "s/{{sender_email}}/${sender_email}/g")
     post_data=$(echo ${post_data} | sed -e "s/{{subject}}/${subject}/g")
-#    post_data=$(echo ${post_data} | sed -e "s/{{html_content}}/${email_final_templates}/g")
     post_data=$(echo ${post_data} | sed -e "s/{{to_email}}/${mail_address}/g")
     post_data=$(echo ${post_data} | sed -e "s/{{to_name}}/${receiver_name}/g")
 
