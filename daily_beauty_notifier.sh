@@ -62,10 +62,11 @@ fi;
 
 if [[ $1 == "" ]]; then
     echo 'Please set contact mail address!'
-    exit 1;
+    echo 'Set default mail address......'
+    mail_address="admin@mail.com"
+else
+    mail_address=$1
 fi;
-
-mail_address=$1
 
 yesterday_date=$(date --date="-1 Day" "+%F")
 today_date=$(date "+%F")
