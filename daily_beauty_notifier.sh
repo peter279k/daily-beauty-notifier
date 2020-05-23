@@ -147,6 +147,12 @@ do
 
 done;
 
+echo "Check today has has the contents..."
+
+if [[ ${post_url_array[0]} == "" ]]; then
+    echo "It has not latest contents on ${yesterday_date}"
+    exit 0;
+fi;
 
 echo "Generate Email Template..."
 
