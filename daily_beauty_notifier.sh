@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo 'Deprecated. Please use the daily_beauty_notifier.py instead.'
+exit 1;
+
 echo 'Check required commands has been started!'
 
 which unzip 2>&1 > /dev/null
